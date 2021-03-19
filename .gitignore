@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+
+# Ignore CMake Linux Outputs
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Ignore build files
+build/
+bin/
+
+# Ignore vscode
+.vscode/
