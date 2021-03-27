@@ -195,6 +195,8 @@
             fr.onload = function () {
                 var data = new Uint8Array(fr.result);
                 Module["FS_createDataFile"]('/', 'textfile', data, true, true, true);
+                console.log("Created file")
+                Module.ccall("readFile2", null, [], null)
 
                 fileInput.value = '';
             };
