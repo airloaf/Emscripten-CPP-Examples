@@ -32,29 +32,6 @@ EMSCRIPTEN_KEEPALIVE
     }
 #ifdef EMSCRIPTEN
 }
-extern "C"
-{
-EMSCRIPTEN_KEEPALIVE void readFile2()
-    {
-        std::string filePath = "textfile";
-        std::fstream file(filePath);
-
-        if (!file.good())
-        {
-            std::cout << "Could not open file: " << filePath << std::endl;
-            file.close();
-            return;
-        }
-
-        std::string line;
-        while (std::getline(file, line))
-        {
-            std::cout << line << std::endl;
-        }
-
-        file.close();
-    }
-}
 #endif
 
 int main(int argc, char *argv[])
@@ -63,8 +40,6 @@ int main(int argc, char *argv[])
     {
         readFile(std::string(argv[1]));
     }
-
-    std::cout << "Hello from main" << std::endl;
 
     return 0;
 }
