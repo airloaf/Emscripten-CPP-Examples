@@ -2,6 +2,13 @@
 #include <iostream>
 #include <string>
 
+#ifdef EMSCRIPTEN
+#include <emscripten/emscripten.h>
+#endif
+
+#ifdef EMSCRIPTEN
+EMSCRIPTEN_KEEPALIVE
+#endif
 void readFile(std::string filePath)
 {
     std::fstream file(filePath);
@@ -28,6 +35,8 @@ int main(int argc, char *argv[])
     {
         readFile(std::string(argv[1]));
     }
+
+    std::cout << "Hello from main" << std::endl;
 
     return 0;
 }
