@@ -40,6 +40,7 @@ Makefile
 # Ignore build files
 build/
 bin/
+lib/
 
 # Ignore vscode
 .vscode/
