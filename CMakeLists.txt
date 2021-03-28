@@ -16,9 +16,7 @@ link_directories(${LIB_DIR})
 # Create a project
 project(EmscriptenTest)
 
-# Create executable for FileRead
-file(GLOB_RECURSE FILE_READ_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} examples/FileRead/src/*.cpp)
-add_executable(FileRead ${FILE_READ_SRC})
+# Set emscripten specific compiler and linker flags
 if (EMSCRIPTEN)
     set(CMAKE_EXECUTABLE_SUFFIX .html)
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -s WASM=1")
@@ -26,7 +24,11 @@ if (EMSCRIPTEN)
     set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall']")
 endif()
 
+# Create executable for FileRead
+file(GLOB_RECURSE FILE_READ_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} examples/FileRead/src/*.cpp)
+add_executable(FileRead ${FILE_READ_SRC})
+
 # Create simple math library for use with the factorial application
 add_library(SimpleMath STATIC examples/MathLibrary/src/SimpleMath.h examples/MathLibrary/src/SimpleMath.cpp)
-add_executable(Factorial examples/MathLibrary/src/main.cpp examples/MathLibrary/src/ExtendedMath.cpp)
+add_executable(Factorial examples/MathLibrary/src/main.cpp)
 target_link_libraries(Factorial SimpleMath)
