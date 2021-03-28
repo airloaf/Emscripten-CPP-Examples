@@ -25,3 +25,8 @@ if (EMSCRIPTEN)
     set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s FORCE_FILESYSTEM=1")
     set(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s EXTRA_EXPORTED_RUNTIME_METHODS=['ccall']")
 endif()
+
+# Create simple math library for use with the factorial application
+add_library(SimpleMath STATIC examples/MathLibrary/src/SimpleMath.h examples/MathLibrary/src/SimpleMath.cpp)
+add_executable(Factorial examples/MathLibrary/src/main.cpp examples/MathLibrary/src/ExtendedMath.cpp)
+target_link_libraries(Factorial SimpleMath)
